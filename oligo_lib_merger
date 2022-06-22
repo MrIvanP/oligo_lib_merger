@@ -1,0 +1,34 @@
+#code still needed here to bring in lst1 and lst2 data from outside files
+
+lst1 = [[100, 140, "onetwo", 1, 2], [250, 295, "onethree", 1, 3], [380, 429, "onefour", 1, 4], [1000, 1050, "onefive", 1, 5], [2000, 2050, "onesix", 1, 6], [380, 429, "oneseven", 1, 7], [1000, 1050, "oneeight", 1, 8], [2000, 2050, "onenine", 1, 9]]
+lst2 = [[50, 90, "threefive", 3, 5], [280, 329, "threesix", 3, 6], [333, 375, "threeseven", 3, 7], [425, 471, "threeeight", 3, 8], [500, 555, "threenine", 3, 9]]
+lst3 = [[80, 130, "sixone", 6, 1], [260, 310, "sixtwo", 6, 2], [311, 360, "sixthree", 6, 3], [1060, 1120, "sixfour", 6, 4], [2400, 2450, "sixfive", 6, 5]]
+lst4 = [[10, 70, "eightone", 8, 1], [390, 459, "eighttwo", 8, 2]]
+lst5 = [[550, 590, "ninesix", 9, 6], [680, 729, "nineseven", 9, 7], [1050, 1090, "nineeight", 9, 8], [1280, 1329, "ninenine", 9, 9]]
+output = []
+
+def OL_screener(lst1, lst2):
+#this checks for lst2 items occurring prior to first lst1 item
+    for i in range(len(lst2)):
+        if lst2[i][1] < lst1[0][0]:
+            lst3.append(lst2[i])
+    for a in range(len(lst1)):
+#this ensures all lst1 items get appended into lst3
+        lst3.append(lst1[a])
+        for b in range(len(lst2)):
+#if the current lst2 oligo starts after the current lst1 oligo...
+            if lst2[b][0] > lst1[a][1]:
+                if (a+1) < len(lst1):
+#...and it ends before the next lst1 oligo begins, then append to lst3
+                    if lst2[b][1] < lst1[a + 1][0]:
+                        lst3.append(lst2[b])
+#this last piece ensures any lst2 items that come after the last lst1 item also get appended
+                else:
+                    lst3.append(lst2[b])
+
+#code still needed here to output lst3 to an outside files
+
+#test print:
+OL_screener(lst1, lst2)
+for i in range(len(lst3)):
+    print(str(lst3[i]))
