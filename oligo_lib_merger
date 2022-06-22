@@ -5,30 +5,35 @@ lst2 = [[50, 90, "threefive", 3, 5], [280, 329, "threesix", 3, 6], [333, 375, "t
 lst3 = [[80, 130, "sixone", 6, 1], [260, 310, "sixtwo", 6, 2], [311, 360, "sixthree", 6, 3], [1060, 1120, "sixfour", 6, 4], [2400, 2450, "sixfive", 6, 5]]
 lst4 = [[10, 70, "eightone", 8, 1], [390, 459, "eighttwo", 8, 2]]
 lst5 = [[550, 590, "ninesix", 9, 6], [680, 729, "nineseven", 9, 7], [1050, 1090, "nineeight", 9, 8], [1280, 1329, "ninenine", 9, 9]]
+
+priority1 = 0
+priority2 = 0
+
 output = []
 
-def OL_screener(lst1, lst2):
+def oligo_lib_merger(priority1, priority2, lst1, lst2, lst3, lst4, lst5):
+
 #this checks for lst2 items occurring prior to first lst1 item
     for i in range(len(lst2)):
         if lst2[i][1] < lst1[0][0]:
-            lst3.append(lst2[i])
+            output.append(lst2[i])
     for a in range(len(lst1)):
 #this ensures all lst1 items get appended into lst3
-        lst3.append(lst1[a])
+        output.append(lst1[a])
         for b in range(len(lst2)):
 #if the current lst2 oligo starts after the current lst1 oligo...
             if lst2[b][0] > lst1[a][1]:
                 if (a+1) < len(lst1):
 #...and it ends before the next lst1 oligo begins, then append to lst3
                     if lst2[b][1] < lst1[a + 1][0]:
-                        lst3.append(lst2[b])
+                        output.append(lst2[b])
 #this last piece ensures any lst2 items that come after the last lst1 item also get appended
                 else:
-                    lst3.append(lst2[b])
+                    output.append(lst2[b])
 
 #code still needed here to output lst3 to an outside files
 
 #test print:
-OL_screener(lst1, lst2)
-for i in range(len(lst3)):
-    print(str(lst3[i]))
+oligo_lib_merger(lst1, lst2)
+for i in range(len(output)):
+    print(str(output[i]))
